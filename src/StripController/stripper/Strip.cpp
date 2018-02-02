@@ -20,21 +20,19 @@ int Strip::GetPixelCount()
 
 void Strip::Initialize()
 {
-	for (int i = 0; i < _strip->numPixels(); i++)
-	{
-		_strip->setPixelColor(i, _strip->Color(255, 255, 255));
-	}
-
-	_strip->setBrightness(255);
-	_strip->show();
+	for (int i = 0; i < _colors.size(); i++)
+		_colors[i] = Color(255, 255, 255);
+		
+	SetBrightness(255);
+	Apply();	
 }
 
 void Strip::SetPixelColor(int pixel, int r, int g, int b)
 {
-	SetPixelColor(pixel, _strip->Color(r, g, b));
+	SetPixelColor(pixel, Color(r, g, b));
 }
 
-void Strip::SetPixelColor(int pixel, int color)
+void Strip::SetPixelColor(int pixel, Color color)
 {
 	_colors[pixel] = color;
 }
@@ -50,7 +48,10 @@ void Strip::Apply()
 	_strip->setBrightness(_brightness);
 
 	for (int i = 0; i < _colors.size(); i++)
-		_strip->setPixelColor(i, _colors[i]);
+	{
+		Color color = _colors[i];
+		_strip->setPixelColor(i, _strip->Color(color.getR(), color.getG(), color.getB()));
+	}
 
 	_strip->show();
 }

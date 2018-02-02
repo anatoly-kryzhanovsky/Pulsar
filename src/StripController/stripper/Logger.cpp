@@ -22,27 +22,36 @@ void Logger::SetLogLevel(int level)
 
 void Logger::Trace(const char* msg)
 {
-	if (_level < LevelTrace)
+	if ((_level & LevelTrace) != LevelTrace)
 		return;
 
 	sprintf(_buffer, "[TRACE] %s", msg);
-	Serial.println(msg);
+	Serial.println(_buffer);
+}
+
+void Logger::Info(const char* msg)
+{
+	if ((_level & LevelInfo) != LevelInfo)
+		return;
+
+	sprintf(_buffer, "[INFO] %s", msg);
+	Serial.println(_buffer);
 }
 
 void Logger::Error(const char* msg)
 {
-	if (_level < LevelError)
+	if ((_level & LevelError) != LevelError)
 		return;
 
 	sprintf(_buffer, "[ERROR] %s", msg);
-	Serial.println(msg);
+	Serial.println(_buffer);
 }
 
 void Logger::Warning(const char* msg)
 {
-	if (_level < LevelWarning)
+	if ((_level & LevelWarning) != LevelWarning)
 		return;
 
 	sprintf(_buffer, "[WARNING] %s", msg);
-	Serial.println(msg);
+	Serial.println(_buffer);
 }

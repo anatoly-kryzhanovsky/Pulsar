@@ -1,18 +1,18 @@
-#ifndef __SET_PIXEL_COLOR_COMMAND_H__
-#define __SET_PIXEL_COLOR_COMMAND_H__
+#ifndef __SET_STRIP_STATE_COMMAND_H__
+#define __SET_STRIP_STATE_COMMAND_H__
 
 #include "Command.h"
 #include "Strip.h"
 #include "Logger.h"
 
-class SetPixelColorCommand : public Command
+class SetStripStateCommand : public Command
 {
 private:
 	Strip* _strip;
 	Logger* _logger;
 
 public:
-	SetPixelColorCommand(Strip* strip, Logger* logger);
+	SetStripStateCommand(Strip* strip, Logger* logger);
 
 	int GetCommandId();
 	void Handle(byte* command);

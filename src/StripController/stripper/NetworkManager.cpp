@@ -23,7 +23,7 @@ bool NetworkManager::Initialize()
 		return false;
 	}
 
-	_logger->Trace(IpToString(Ethernet.localIP()));
+	_logger->Info(IpToString(Ethernet.localIP()));
 	_logger->Trace("NetworkManager initialization with DHCP end");
 	return true;
 }
@@ -39,7 +39,7 @@ void NetworkManager::Initialize(IPAddress ip, IPAddress mask, IPAddress gateway,
 void NetworkManager::AssignIP(IPAddress ip, IPAddress mask, IPAddress gateway, IPAddress dns)
 {
 	_logger->Trace("Manual assign IP begin");
-	_logger->Trace(IpToString(ip));
+	_logger->Info(IpToString(ip));
 	Ethernet.begin(_mac, ip, dns, gateway, mask);
 	_logger->Trace("Manual assign IP end");
 }
@@ -59,14 +59,23 @@ char* NetworkManager::ReadPackage()
 		int packetSize = _udp.parsePacket();
 		if (packetSize)
 		{
-			sprintf(buffer, "Receive package %d bytes", packetSize);
+			byte length = _udp.read();
+			byte readed = 0;
+			while (readed < length)
+			{
+				readed += _udp.readBytes(_packetBuffer + readed, length - readed);
+				
+				sprintf(buffer, "%d", readed);
+				_logger->Trace(buffer);
+			}
+
+			sprintf(buffer, "Receive package %d bytes", length);
 			_logger->Trace(buffer);
-
-			_udp.read(_packetBuffer, UDP_TX_PACKET_MAX_SIZE);
-			_logger->Trace("Read package end");
-
+						
 			return _packetBuffer;
 		}
+		else
+			delay(20);
 	} while (1);
 }
 

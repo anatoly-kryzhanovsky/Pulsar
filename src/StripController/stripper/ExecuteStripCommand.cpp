@@ -12,7 +12,7 @@ int ExecuteStripCommand::GetCommandId()
 
 void ExecuteStripCommand::Handle(byte* command)
 {
-	_logger->Trace("Handle ExecuteStripCommand begin");
+	_logger->Trace("Handle ExecuteStripCommand begin");	
 	_strip->Apply();
 	_logger->Trace("Handle ExecuteStripCommand end");
 }

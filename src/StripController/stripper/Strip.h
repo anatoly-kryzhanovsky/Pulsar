@@ -6,11 +6,12 @@
 #include <vector>
 
 #include "Logger.h"
+#include "Color.h"
 
 class Strip
 {
-private:
-	std::vector<int> _colors;
+public:
+	std::vector<Color> _colors;
 	Adafruit_NeoPixel* _strip;
 	uint8_t _brightness;
 	Logger* _logger;
@@ -20,7 +21,7 @@ public:
 	~Strip();
 
 	void Initialize();
-	void SetPixelColor(int pixel, int color);
+	void SetPixelColor(int pixel, Color color);
 	void SetPixelColor(int pixel, int r, int g, int b);
 	void SetBrightness(uint8_t brightness);
 	void Apply();

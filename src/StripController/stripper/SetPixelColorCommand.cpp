@@ -16,7 +16,7 @@ void SetPixelColorCommand::Handle(byte* command)
 
 	int offset = 1;
 
-	int pixel = (int)(command[offset++] << 8) + (int)command[offset++];
+	byte pixel = command[offset++];
 	byte r = command[offset++];
 	byte g = command[offset++];
 	byte b = command[offset++];
@@ -27,5 +27,5 @@ void SetPixelColorCommand::Handle(byte* command)
 
 	_strip->SetPixelColor(pixel, r, g, b);
 
-	_logger->Trace("Handle SetPixelColorCommand begin");
+	_logger->Trace("Handle SetPixelColorCommand end");
 }

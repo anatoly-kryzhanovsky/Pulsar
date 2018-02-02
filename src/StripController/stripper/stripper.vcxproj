@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{26B559DD-17CE-4A2F-A3CA-6603F9A8F0CD}</ProjectGuid>
+    <RootNamespace>
+    </RootNamespace>
+    <ProjectName>stripper</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>
+    </PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>
+    </PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\stripper;$(ProjectDir)..\libraries\Adafruit_NeoPixel;D:\ArduinoIDE\arduino-1.8.1\libraries\STL;D:\ArduinoIDE\arduino-1.8.1\hardware\arduino\avr\libraries\SPI\src;D:\ArduinoIDE\arduino-1.8.1\libraries\Ethernet\src;D:\ArduinoIDE\arduino-1.8.1\libraries\Ethernet\src\utility;D:\ArduinoIDE\arduino-1.8.1\libraries;D:\ArduinoIDE\arduino-1.8.1\hardware\arduino\avr\libraries;$(ProjectDir)..\libraries;D:\ArduinoIDE\arduino-1.8.1\hardware\arduino\avr\cores\arduino;D:\ArduinoIDE\arduino-1.8.1\hardware\arduino\avr\variants\mega;D:\ArduinoIDE\arduino-1.8.1\hardware\tools\avr\avr\include\;D:\ArduinoIDE\arduino-1.8.1\hardware\tools\avr\avr\include\avr\;D:\ArduinoIDE\arduino-1.8.1\hardware\tools\avr\lib\gcc\avr\4.8.1\include;D:\ArduinoIDE\arduino-1.8.1\hardware\tools\avr\lib\gcc\avr\4.9.2\include;D:\ArduinoIDE\arduino-1.8.1\hardware\tools\avr\lib\gcc\avr\4.9.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ProjectDir)__vm\.stripper.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <PreprocessorDefinitions>__AVR_ATmega2560__;_DEBUG=1;_VMDEBUG=1;F_CPU=16000000L;ARDUINO=10801;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\stripper;$(ProjectDir)..\libraries\Adafruit_NeoPixel;D:\ArduinoIDE\arduino-1.8.1\libraries\Ethernet\src;D:\ArduinoIDE\arduino-1.8.1\libraries\Ethernet\src\utility;D:\ArduinoIDE\arduino-1.8.1\hardware\arduino\avr\libraries\SPI\src;D:\ArduinoIDE\arduino-1.8.1\libraries\STL;D:\ArduinoIDE\arduino-1.8.1\libraries;D:\ArduinoIDE\arduino-1.8.1\hardware\arduino\avr\libraries;$(ProjectDir)..\libraries;D:\ArduinoIDE\arduino-1.8.1\hardware\arduino\avr\cores\arduino;D:\ArduinoIDE\arduino-1.8.1\hardware\arduino\avr\variants\mega;D:\ArduinoIDE\arduino-1.8.1\hardware\tools\avr\avr\include\;D:\ArduinoIDE\arduino-1.8.1\hardware\tools\avr\avr\include\avr\;D:\ArduinoIDE\arduino-1.8.1\hardware\tools\avr\lib\gcc\avr\4.8.1\include;D:\ArduinoIDE\arduino-1.8.1\hardware\tools\avr\lib\gcc\avr\4.9.2\include;D:\ArduinoIDE\arduino-1.8.1\hardware\tools\avr\lib\gcc\avr\4.9.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ProjectDir)__vm\.stripper.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <PreprocessorDefinitions>__AVR_ATmega2560__;_DEBUG=1;_VMDEBUG=1;F_CPU=16000000L;ARDUINO=10801;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="VisualMicro" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="stripper.ino">
+      <FileType>CppCode</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Color.h" />
+    <ClInclude Include="Command.h" />
+    <ClInclude Include="ExecuteStripCommand.h" />
+    <ClInclude Include="Logger.h" />
+    <ClInclude Include="NetworkManager.h" />
+    <ClInclude Include="SetBrighnessCommand.h" />
+    <ClInclude Include="SetPixelColorBulkCommand.h" />
+    <ClInclude Include="SetPixelColorCommand.h" />
+    <ClInclude Include="SetStripStateCommand.h" />
+    <ClInclude Include="Strip.h" />
+    <ClInclude Include="__vm\.stripper.vsarduino.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Color.cpp" />
+    <ClCompile Include="ExecuteStripCommand.cpp" />
+    <ClCompile Include="Logger.cpp" />
+    <ClCompile Include="NetworkManager.cpp" />
+    <ClCompile Include="SetBrighnessCommand.cpp" />
+    <ClCompile Include="SetPixelColorBulkCommand.cpp" />
+    <ClCompile Include="SetPixelColorCommand.cpp" />
+    <ClCompile Include="SetStripStateCommand.cpp" />
+    <ClCompile Include="Strip.cpp" />
+  </ItemGroup>
+  <PropertyGroup>
+    <DebuggerFlavor>VisualMicroDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties debug.local.portname="COM6" debug.view.DigitalPins="" debug.local.portspeed="9600" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

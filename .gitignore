@@ -10,3 +10,6 @@ src/StripController/StripController.Infrastructure/obj/
 src/StripController/StripController/bin/
 src/StripController/StripController/obj/
 src/StripController/StripController/Resources/Thumbs.db
+src/StripController/stripper/Debug/
+src/StripController/stripper/Release/
+src/StripController/stripper/__vm/
