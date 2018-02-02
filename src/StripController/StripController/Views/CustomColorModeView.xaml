@@ -1,0 +1,101 @@
+﻿<UserControl 
+    x:Class="StripController.Views.CustomColorModeView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:converters="clr-namespace:StripController.Converters"
+    mc:Ignorable="d" 
+    d:DesignHeight="300" d:DesignWidth="600">
+    <UserControl.Resources>
+        <converters:ColorComponentToBrushConverter x:Key="ColorConverter"/>
+        <converters:BooleanToVisibilityConverter 
+            x:Key="ApplyButtonVisibilityConverter"
+            VisibleForTrue="Collapsed"
+            VisibleForFalse="Visible"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Image
+            Margin="16"
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Name="Pallate"
+            HorizontalAlignment="Center"
+            MouseMove="Image_MouseMove"
+            MouseDown="Image_MouseDown"
+            MouseUp="Image_MouseUp"
+            Source="../Resources/pallate.jpg"
+            Stretch="Uniform"/>
+        <Image
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Name="Target"
+            Source="../Resources/target.png"
+            Width="32"
+            Height="32"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            IsHitTestVisible="False"
+            Visibility="Hidden"/>
+        <Slider
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Name="Brightness"
+            Minimum="0"
+            Maximum="255"
+            Value="{Binding Brightness}"
+            ValueChanged="RangeBase_OnValueChanged"/>
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="0"
+            Margin="5"
+            Text="Выбранный цвет:"
+            VerticalAlignment="Center"/>
+        <Border
+            Grid.Row="2"
+            Grid.Column="1"
+            Margin="5"
+            BorderThickness="2"            
+            CornerRadius="8"
+            VerticalAlignment="Center"
+            Width="36"
+            Height="36">
+            <Border.Background>
+                <MultiBinding Converter="{StaticResource ColorConverter}">
+                    <Binding Path="R"/>
+                    <Binding Path="G"/>
+                    <Binding Path="B"/>
+                </MultiBinding>                
+            </Border.Background>
+        </Border>
+        <Button
+            Grid.Row="2"
+            Grid.Column="2"
+            Padding="5"
+            Margin="5"
+            Content="Прмиенить"
+            Visibility="{Binding AutoApply, Converter={StaticResource ApplyButtonVisibilityConverter}}"
+            Click="OnApplyButtonClick"/>
+        <CheckBox            
+            Grid.Row="3"
+            Grid.Column="0"
+            VerticalAlignment="Center"
+            Margin="5"
+            IsChecked="{Binding AutoApply}"
+            Content="Применять автоматически"/>        
+    </Grid>
+</UserControl>

@@ -1,0 +1,12 @@
+src/StripController/StripController.VC.db
+src/StripController/.vs/StripController/v14/.suo
+src/StripController/packages/
+*.user
+src/StripController/StripController.Arduino/Debug/
+src/StripController/StripController.Configuration/bin/
+src/StripController/StripController.Configuration/obj/
+src/StripController/StripController.Infrastructure/bin/
+src/StripController/StripController.Infrastructure/obj/
+src/StripController/StripController/bin/
+src/StripController/StripController/obj/
+src/StripController/StripController/Resources/Thumbs.db

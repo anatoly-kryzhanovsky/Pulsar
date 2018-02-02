@@ -1,0 +1,24 @@
+﻿<Controls:MetroWindow 
+    x:Class="StripController.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    mc:Ignorable="d"
+    Title="Pulsar controller" Height="550" Width="525"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextElement.FontWeight="Regular"
+    TextElement.FontSize="13"
+    TextOptions.TextFormattingMode="Ideal" 
+    TextOptions.TextRenderingMode="Auto"        
+    Background="{DynamicResource MaterialDesignPaper}"
+    FontFamily="{DynamicResource MaterialDesignFont}" Icon="Resources/icon.png">
+    <Grid>
+        <TabControl 
+            x:Name="Modes"
+            SelectionChanged="Modes_OnSelectionChanged">
+           
+        </TabControl>
+    </Grid>
+</Controls:MetroWindow>

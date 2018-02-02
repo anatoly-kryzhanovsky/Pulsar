@@ -1,0 +1,343 @@
+﻿<UserControl 
+    x:Class="StripController.Views.ProgramModeView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:converters="clr-namespace:StripController.Converters"
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+    xmlns:services="clr-namespace:StripController.Services"
+    xmlns:presentationEntities="clr-namespace:StripController.PresentationEntities"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:templateSelectors="clr-namespace:StripController.TemplateSelectors"
+    xmlns:views="clr-namespace:StripController.Views"
+    mc:Ignorable="d" 
+    d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <converters:ColorComponentToColorConverter x:Key="ColorConverter"/>
+        <converters:ColorComponentToBrushConverter x:Key="BrushConverter"/>
+        <converters:EnumConverter x:Key="EnumConverter"/>
+        <converters:BooleanToVisibilityConverter 
+            x:Key="ButtonVisibilityConverter"
+            VisibleForFalse="Collapsed"
+            VisibleForTrue="Visible"/>
+        <converters:BrightnessConverter x:Key="BrightnessConverter"/>
+        <converters:CanEditTargetConverter x:Key="CanEditTargetConverter"/>
+
+        <Style TargetType="{x:Type ListView}" BasedOn="{StaticResource {x:Type ListView}}">
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <DataTemplate x:Key="ColorValueEditorTemplate">
+            <xctk:ColorPicker
+                MaxDropDownWidth="250">
+                <xctk:ColorPicker.SelectedColor>
+                    <MultiBinding Converter="{StaticResource ColorConverter}">
+                        <Binding Path="R"/>
+                        <Binding Path="G"/>
+                        <Binding Path="B"/>
+                    </MultiBinding>
+                </xctk:ColorPicker.SelectedColor>
+            </xctk:ColorPicker>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ColorValueTemplate">
+            <Border
+                CornerRadius="3"
+                BorderBrush="Black"
+                BorderThickness="1">
+                <Border.Background>
+                    <MultiBinding Converter="{StaticResource BrushConverter}">
+                        <Binding Path="R"/>
+                        <Binding Path="G"/>
+                        <Binding Path="B"/>
+                    </MultiBinding>
+                </Border.Background>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="BrightnessValueEditorTemplate">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBox 
+                    Grid.Row="0"
+                    Text="{Binding Brightness, UpdateSourceTrigger=PropertyChanged}"/>
+                <Slider
+                    Grid.Row="1"
+                    Minimum="0"
+                    Maximum="255"
+                    Value="{Binding Brightness, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="BrightnessValueTemplate">
+            <Border
+                CornerRadius="3"
+                BorderBrush="Black"
+                BorderThickness="1"
+                Background="{Binding Brightness, Converter={StaticResource BrightnessConverter}}"/>
+        </DataTemplate>
+
+        <templateSelectors:ProgramValueTemplateSelector 
+            x:Key="ValueTemplateSelector"
+            BrightnessDataTemplate="{StaticResource BrightnessValueTemplate}"                                            
+            ColorDataTemplate="{StaticResource ColorValueTemplate}"/>
+
+        <templateSelectors:ProgramValueTemplateSelector 
+            x:Key="ValueEditorTemplateSelector"
+            BrightnessDataTemplate="{StaticResource BrightnessValueEditorTemplate}"
+            ColorDataTemplate="{StaticResource ColorValueEditorTemplate}"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <DataGrid
+            IsEnabled="{Binding CanPlay}"
+            Margin="0,0,30,0"
+            ItemsSource="{Binding Items}"
+            Name="Items"
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            AutoGenerateColumns="False"
+            CanUserAddRows="False"
+            CanUserDeleteRows="False"
+            CanUserReorderColumns="False"
+            CanUserSortColumns="False"
+            CanUserResizeColumns="False"
+            CanUserResizeRows="False">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn
+                    Width="*"
+                    Header=""
+                    IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border
+                                Width="8"
+                                Height="8"
+                                Background="BlueViolet"
+                                Visibility="{Binding Current, Converter={StaticResource ButtonVisibilityConverter}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn
+                    Width="*"
+                    Header="Тип">
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <ComboBox
+                                VerticalAlignment="Center"
+                                ItemsSource="{Binding Source={services:EnumToItemsSource {x:Type presentationEntities:EProgramItemType}}}"
+                                SelectedValue="{Binding Type, Converter={StaticResource EnumConverter},  ConverterParameter={x:Type presentationEntities:EProgramItemType}, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                Text="{Binding Type, Converter={StaticResource EnumConverter},  ConverterParameter={x:Type presentationEntities:EProgramItemType}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn
+                    Width="*"
+                    Header="Время">
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <TextBox
+                                VerticalAlignment="Center"
+                                Text="{Binding Timeoffset, StringFormat=hh\\:mm\\:ss\\.f}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                Text="{Binding Timeoffset, StringFormat=hh\\:mm\\:ss\\.f}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn
+                    Width="*"
+                    Header="Цель">
+                    <DataGridTemplateColumn.CellStyle>
+                        <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                            <Setter Property="IsEnabled" Value="{Binding Path=Type, Converter={StaticResource CanEditTargetConverter}}" />
+                        </Style>
+                    </DataGridTemplateColumn.CellStyle>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBox
+                                    Grid.Column="0"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding StartPixel}"/>
+
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    Grid.Column="1"
+                                    Text=" - "/>
+
+                                <TextBox
+                                    Grid.Column="2"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding EndPixel}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock
+                                VerticalAlignment="Center">
+                                <Run Text="{Binding StartPixel}"/>
+                                <Run Text=" - "/>
+                                <Run Text="{Binding EndPixel}"/>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn
+                    Width="*"
+                    Header="Значение"
+                    CellEditingTemplateSelector="{StaticResource ValueEditorTemplateSelector}"
+                    CellTemplateSelector="{StaticResource ValueTemplateSelector}"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button 
+                                Click="OnItemDeleteClick"
+                                Tag="{Binding}"
+                                Margin="6"
+                                Padding="4">
+                                <materialDesign:PackIcon 
+                                    Kind="Delete" 
+                                    Height="24" 
+                                    Width="24" />
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button 
+            IsEnabled="{Binding CanPlay}"
+            Grid.Row="0"
+            Grid.Column="2"
+            Style="{DynamicResource MaterialDesignFloatingActionMiniAccentButton}"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Margin="0,30,8,0"
+            Click="OnCreateItemClick">
+            <materialDesign:PackIcon 
+                Kind="Plus" 
+                Height="24" 
+                Width="24" />
+        </Button>
+        
+        <CheckBox
+            Grid.Row="1"
+            Grid.Column="0"
+            Content="Плавная анимация"
+            IsEnabled="{Binding CanPlay}"
+            IsChecked="{Binding Interpolate}"/>
+        
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="1"
+            Visibility="{Binding CanStop, Converter={StaticResource ButtonVisibilityConverter}}"
+            Text="{Binding CurrentTime, StringFormat=hh\\:mm\\:ss\\.f}"
+            FontSize="24"
+            Foreground="DimGray"
+            VerticalAlignment="Center"/>
+
+        <WrapPanel 
+            HorizontalAlignment="Right"
+            Grid.Row="1"
+            Grid.Column="1"
+            Grid.ColumnSpan="2">
+
+            <Button 
+                IsEnabled="{Binding CanPlay}"
+                Click="OnResetClick"
+                Margin="6"
+                Padding="4">
+                <materialDesign:PackIcon 
+                    Kind="Delete" 
+                    Height="24" 
+                    Width="24" />
+            </Button>
+
+            <Button 
+                IsEnabled="{Binding CanPlay}"
+                Click="OnSaveClick"
+                Margin="6"
+                Padding="4">
+                <materialDesign:PackIcon 
+                    Kind="ContentSave" 
+                    Height="24" 
+                    Width="24" />
+            </Button>
+            
+            <Button 
+                IsEnabled="{Binding CanPlay}"
+                Click="OnLoadClick"
+                Margin="6"
+                Padding="4">
+                <materialDesign:PackIcon 
+                    Kind="FileRestore" 
+                    Height="24" 
+                    Width="24" />
+            </Button>
+
+            <Button 
+                Visibility="{Binding CanPlay, Converter={StaticResource ButtonVisibilityConverter}}"
+                Click="OnPlayClick"
+                Margin="6"
+                Padding="4">
+                <materialDesign:PackIcon 
+                    Kind="Play" 
+                    Height="24" 
+                    Width="24" />
+            </Button>
+            <Button 
+                Visibility="{Binding CanStop, Converter={StaticResource ButtonVisibilityConverter}}"
+                Click="OnStopClick"
+                Margin="6"
+                Padding="4">
+                <materialDesign:PackIcon 
+                    Kind="Stop" 
+                    Height="24" 
+                    Width="24" />
+            </Button>
+        </WrapPanel>
+    </Grid>
+</UserControl>
+
+
+
