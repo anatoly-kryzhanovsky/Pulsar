@@ -11,9 +11,10 @@ namespace StripController
 {
     public partial class MainWindow: IMainWindow
     {
-        private ICaptureModeView _captureModeView;
+        private IAudioCaptureModeView _audioCaptureModeView;
         private ICustomColorModeView _customColorModeView;
         private IProgramModeView _programModeView;
+        private IVideoCaptureModeView _videoCaptureModeView;
 
         public MainWindow()
         {
@@ -29,19 +30,28 @@ namespace StripController
 
         public void SetViewFactory(IViewFactory viewFactory)
         {
-            _captureModeView = viewFactory.CreateCaptureColorModeView();
-            _captureModeView.LoadState();
+            _videoCaptureModeView = viewFactory.CreateVideoCaptureColorModeView();
+            _videoCaptureModeView.LoadState();
+
+            _audioCaptureModeView = viewFactory.CreateCaptureColorModeView();
+            _audioCaptureModeView.LoadState();
 
             _customColorModeView = viewFactory.CreateCustomCoroModeView();
             _customColorModeView.LoadState();
 
             _programModeView = viewFactory.CreateProgramModeView();
             _programModeView.LoadState();
-            
+
             Modes.Items.Add(new TabItem
             {
-                Content = _captureModeView,
-                Header = "Capture color"
+                Content = _videoCaptureModeView,
+                Header = "Video"
+            });
+
+            Modes.Items.Add(new TabItem
+            {
+                Content = _audioCaptureModeView,
+                Header = "Audio"
             });
 
             Modes.Items.Add(new TabItem
@@ -66,7 +76,7 @@ namespace StripController
                 view?.Deactivate();
             }
 
-            _captureModeView.SaveState();
+            _audioCaptureModeView.SaveState();
             _customColorModeView.SaveState();
             _programModeView.SaveState();
 

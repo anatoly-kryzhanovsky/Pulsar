@@ -20,7 +20,7 @@ namespace StripController.Presenters
 {
     class CaptureModePresenter
     {
-        private readonly ICaptureModeView _view;
+        private readonly IAudioCaptureModeView _view;
         private readonly IViewFactory _viewFactory;
         private readonly ICaptureModeSettings _settings;
         private readonly TaskScheduler _uiScheduler;
@@ -29,7 +29,7 @@ namespace StripController.Presenters
         private IEnumerable<GradientPointPe> _gradient;
 
         public CaptureModePresenter(
-            ICaptureModeView view,
+            IAudioCaptureModeView view,
             IViewFactory viewFactory,
             ICaptureModeSettings settings, 
             IStripper stripper)

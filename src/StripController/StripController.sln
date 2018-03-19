@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StripController.Infrastruct
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StripController.Configuration", "StripController.Configuration\StripController.Configuration.csproj", "{A0F090F7-69C7-4A23-8F40-DC04261C4D95}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stripper", "..\..\..\Arduino\stripper\stripper.vcxproj", "{26B559DD-17CE-4A2F-A3CA-6603F9A8F0CD}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stripper", "stripper\stripper.vcxproj", "{26B559DD-17CE-4A2F-A3CA-6603F9A8F0CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,7 +57,7 @@ Global
 		{A0F090F7-69C7-4A23-8F40-DC04261C4D95}.Release|x64.Build.0 = Release|Any CPU
 		{A0F090F7-69C7-4A23-8F40-DC04261C4D95}.Release|x86.ActiveCfg = Release|Any CPU
 		{A0F090F7-69C7-4A23-8F40-DC04261C4D95}.Release|x86.Build.0 = Release|Any CPU
-		{26B559DD-17CE-4A2F-A3CA-6603F9A8F0CD}.Debug|Any CPU.ActiveCfg = Release|Win32
+		{26B559DD-17CE-4A2F-A3CA-6603F9A8F0CD}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{26B559DD-17CE-4A2F-A3CA-6603F9A8F0CD}.Debug|x64.ActiveCfg = Debug|Win32
 		{26B559DD-17CE-4A2F-A3CA-6603F9A8F0CD}.Debug|x86.ActiveCfg = Debug|Win32
 		{26B559DD-17CE-4A2F-A3CA-6603F9A8F0CD}.Debug|x86.Build.0 = Debug|Win32

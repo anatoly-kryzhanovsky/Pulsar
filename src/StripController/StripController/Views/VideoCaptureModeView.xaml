@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="StripController.Views.VideoCaptureModeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:StripController.Views"
+             xmlns:converters="clr-namespace:StripController.Converters"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>       
+    </UserControl.Resources>
+    <Grid>
+        <Grid x:Name="color" >
+        </Grid>
+        <TextBlock
+            Foreground="White"
+            FontSize="24"
+            Name="label"
+            HorizontalAlignment="Right"/>
+
+    </Grid>
+    
+</UserControl>

@@ -8,7 +8,7 @@ using StripController.ViewInterfaces;
 
 namespace StripController.Views
 {
-    public partial class CaptureModeView : ICaptureModeView
+    public partial class CaptureModeView : IAudioCaptureModeView
     {
         public CaptureColorModePe DisplayObject
         {

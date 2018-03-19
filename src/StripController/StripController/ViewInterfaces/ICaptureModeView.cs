@@ -8,7 +8,7 @@ namespace StripController.ViewInterfaces
     public delegate void CaptureStatusChangedDelegate(object sender, CaptureStatusChangedArgs args);
     public delegate void SpectrumImageSizeChangedDelegate(object sender, SpectrumImageSizeChangedArgs args);
 
-    public interface ICaptureModeView : IView
+    public interface IAudioCaptureModeView : IView
     {
         CaptureColorModePe DisplayObject { get; set; }
         
@@ -22,4 +22,6 @@ namespace StripController.ViewInterfaces
         void UpdateVisual();
         void SetGradient(GradientPointPe[] gradient);
     }
+
+  
 }

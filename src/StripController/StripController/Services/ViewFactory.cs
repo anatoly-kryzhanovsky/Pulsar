@@ -23,7 +23,7 @@ namespace StripController.Services
             return view;
         }
 
-        public ICaptureModeView CreateCaptureColorModeView()
+        public IAudioCaptureModeView CreateCaptureColorModeView()
         {
             var view = new CaptureModeView();
             _kernel.Get<CaptureModePresenter>(new ConstructorArgument("view", view));
@@ -55,6 +55,14 @@ namespace StripController.Services
         public ISaveFileDialog CreateSaveFileDialog()
         {
             return new SaveFileDialog();
+        }
+
+        public IVideoCaptureModeView CreateVideoCaptureColorModeView()
+        {
+            var view = new VideoCaptureModeView();
+            //_kernel.Get<CustomColorModePresenter>(new ConstructorArgument("view", view));
+
+            return view;
         }
     }
 }

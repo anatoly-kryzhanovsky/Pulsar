@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -155,6 +156,7 @@
     <Compile Include="TemplateSelectors\ProgramValueTemplateSelector.cs" />
     <Compile Include="ViewInterfaces\BrightnessChangedArgs.cs" />
     <Compile Include="ViewInterfaces\CaptureStatusChangedArgs.cs" />
+    <Compile Include="ViewInterfaces\IVideoCaptureModeView.cs" />
     <Compile Include="ViewInterfaces\ColorChangedArgs.cs" />
     <Compile Include="ViewInterfaces\DeleteItemRequestedAgrs.cs" />
     <Compile Include="ViewInterfaces\ICaptureModeView.cs" />
@@ -166,6 +168,9 @@
     <Compile Include="ViewInterfaces\IView.cs" />
     <Compile Include="ViewInterfaces\SensivityChangedArgs.cs" />
     <Compile Include="ViewInterfaces\SpectrumImageSizeChangedArgs.cs" />
+    <Compile Include="Views\VideoCaptureModeView.xaml.cs">
+      <DependentUpon>VideoCaptureModeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CaptureModeView.xaml.cs">
       <DependentUpon>CaptureModeView.xaml</DependentUpon>
     </Compile>
@@ -196,6 +201,10 @@
     <Compile Include="ViewInterfaces\ICustomColorModeView.cs">
       <Generator>MSBuild:Compile</Generator>
     </Compile>
+    <Page Include="Views\VideoCaptureModeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\CaptureModeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
