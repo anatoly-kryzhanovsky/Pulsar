@@ -130,20 +130,34 @@ namespace StripController.Services.Modes
             var width = srcData.Width;
             var height = srcData.Height;
 
+            var pixelWidth = (int)Math.Ceiling(1.0 * width / Stripper.PixelCount);
+
             unsafe
             {
-                byte* p = (byte*)(void*)scan0;
+                byte* rawData = (byte*)(void*)scan0;
 
                 for (int y = 0; y < height; y++)
-                {
-                    for (int x = 0; x < width; x++)
+                {                    
+                    for (int x = 0; x < width; x += pixelWidth)
                     {
-                        int idx = (y * stride) + x * 4;
-                        var q = (int)(1.0 * x * Stripper.PixelCount / width);
+                        var pixelColor = new long[3];
 
-                        accumulator[q, 0] += p[idx + 0];
-                        accumulator[q, 1] += p[idx + 1];
-                        accumulator[q, 2] += p[idx + 2];                 
+                        for (int p = 0; p < pixelWidth && x + p < width; p++)
+                        {
+                            int idx = (y * stride) + (x + p) * 4;
+
+                            pixelColor[0] += rawData[idx + 0];
+                            pixelColor[1] += rawData[idx + 1];
+                            pixelColor[2] += rawData[idx + 2];
+                        }
+
+                        var pixelIndex = x / pixelWidth;
+                        accumulator[pixelIndex, 0] += pixelColor[0] / pixelWidth;
+                        accumulator[pixelIndex, 1] += pixelColor[1] / pixelWidth;
+                        accumulator[pixelIndex, 2] += pixelColor[2] / pixelWidth;
+
+                        if (!(pixelColor[0] / pixelWidth < 30 && pixelColor[1] / pixelWidth < 30 && pixelColor[2] / pixelWidth < 30))
+                            actualPixels[pixelIndex]++;
                     }
                 }
             }
@@ -154,12 +168,20 @@ namespace StripController.Services.Modes
 
             for (int i = 0; i < Stripper.PixelCount; i++)
             {
-                displayColors[i] = System.Windows.Media.Color.FromRgb(
-                        (byte)(accumulator[i, 2] / (width / Stripper.PixelCount * height)),
-                        (byte)(accumulator[i, 1] / (width / Stripper.PixelCount * height)),
-                        (byte)(accumulator[i, 0] / (width / Stripper.PixelCount * height)));
+                if (actualPixels[i] == 0)
+                {
+                    displayColors[i] = System.Windows.Media.Color.FromRgb(0, 0, 0);
+                    stripperColor[i] = Color.FromArgb(0, 0, 0);
+                }
+                else
+                {
+                    displayColors[i] = System.Windows.Media.Color.FromRgb(
+                        (byte)(accumulator[i, 2] / actualPixels[i]),
+                        (byte)(accumulator[i, 1] / actualPixels[i]),
+                        (byte)(accumulator[i, 0] / actualPixels[i]));
 
-                stripperColor[i] = Color.FromArgb(displayColors[i].R, displayColors[i].G, displayColors[i].B);
+                    stripperColor[i] = Color.FromArgb(displayColors[i].R, displayColors[i].G, displayColors[i].B);
+                }
             }
 
             Stripper.SetPixelsColor(255, stripperColor);

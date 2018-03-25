@@ -79,6 +79,7 @@ namespace StripController
             _audioCaptureModeView.SaveState();
             _customColorModeView.SaveState();
             _programModeView.SaveState();
+            _videoCaptureModeView.SaveState();
 
             base.OnClosing(e);
         }
