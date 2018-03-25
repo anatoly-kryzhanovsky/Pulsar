@@ -34,6 +34,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CSCore, Version=1.2.1.2, Culture=neutral, PublicKeyToken=5a08f2b6f4415dea, processorArchitecture=MSIL">
@@ -59,6 +60,15 @@
     <Reference Include="Ninject, Version=3.3.1.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.3.1\lib\net45\Ninject.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="SharpDX, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.4.1.0-ci217\lib\net45\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D11, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.Direct3D11.4.1.0-ci217\lib\net45\SharpDX.Direct3D11.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DXGI, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.DXGI.4.1.0-ci217\lib\net45\SharpDX.DXGI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -117,7 +127,7 @@
     <Compile Include="Converters\ColorComponentToBrushConverter.cs" />
     <Compile Include="Converters\ColorComponentToColorConverter.cs" />
     <Compile Include="Converters\EnumConverter.cs" />
-    <Compile Include="PresentationEntities\CaptureColorModePe.cs" />
+    <Compile Include="PresentationEntities\AudioCaptureColorModePe.cs" />
     <Compile Include="PresentationEntities\ColorPe.cs" />
     <Compile Include="PresentationEntities\CustomColorModePe.cs" />
     <Compile Include="PresentationEntities\EProgramItemType.cs" />
@@ -126,13 +136,15 @@
     <Compile Include="PresentationEntities\PresentationEntity.cs" />
     <Compile Include="PresentationEntities\ProgramItemPe.cs" />
     <Compile Include="PresentationEntities\ProgramModePe.cs" />
+    <Compile Include="Presenters\VideoCaptureModePresenter.cs" />
     <Compile Include="Services\Modes\Animation\Animation.cs" />
-    <Compile Include="Services\Modes\CaptureMode.cs" />
-    <Compile Include="Services\Modes\ICaptureMode.cs" />
+    <Compile Include="Services\Modes\AudioCaptureMode.cs" />
+    <Compile Include="Services\Modes\IAudioCaptureMode.cs" />
+    <Compile Include="Services\Modes\IVideoCaptureMode.cs" />
     <Compile Include="Services\Modes\SpectrumUpdatedEventArgs.cs" />
     <Compile Include="Services\Modes\Spectrum\SpectrumProvider.cs" />
     <Compile Include="Services\Modes\Animation\BrightnessAnimation.cs" />
-    <Compile Include="Presenters\CaptureModePresenter.cs" />
+    <Compile Include="Presenters\AudioCaptureModePresenter.cs" />
     <Compile Include="Services\Modes\Animation\ColorAnimation.cs" />
     <Compile Include="Presenters\CustomColorModePresenter.cs" />
     <Compile Include="Services\Modes\Animation\PixelState.cs" />
@@ -149,6 +161,8 @@
     <Compile Include="Services\Modes\ProgramMode.cs" />
     <Compile Include="Services\Modes\Spectrum\SpectrumPointData.cs" />
     <Compile Include="Services\Modes\TimeChangedEventArgs.cs" />
+    <Compile Include="Services\Modes\VideoCaptureMode.cs" />
+    <Compile Include="Services\Modes\VideoUpdatedEventArgs.cs" />
     <Compile Include="Services\ModuleConfig\ApplicationKernel.cs" />
     <Compile Include="Services\ModuleConfig\ApplicationServiceModules.cs" />
     <Compile Include="Services\Settings.cs" />
@@ -159,7 +173,7 @@
     <Compile Include="ViewInterfaces\IVideoCaptureModeView.cs" />
     <Compile Include="ViewInterfaces\ColorChangedArgs.cs" />
     <Compile Include="ViewInterfaces\DeleteItemRequestedAgrs.cs" />
-    <Compile Include="ViewInterfaces\ICaptureModeView.cs" />
+    <Compile Include="ViewInterfaces\IAudioCaptureModeView.cs" />
     <Compile Include="ViewInterfaces\IDialog.cs" />
     <Compile Include="ViewInterfaces\IMainWindow.cs" />
     <Compile Include="ViewInterfaces\IOpenFileDialog.cs" />
@@ -171,8 +185,8 @@
     <Compile Include="Views\VideoCaptureModeView.xaml.cs">
       <DependentUpon>VideoCaptureModeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CaptureModeView.xaml.cs">
-      <DependentUpon>CaptureModeView.xaml</DependentUpon>
+    <Compile Include="Views\AudioCaptureModeView.xaml.cs">
+      <DependentUpon>AudioCaptureModeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CustomColorModeView.xaml.cs">
       <DependentUpon>CustomColorModeView.xaml</DependentUpon>
@@ -205,7 +219,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\CaptureModeView.xaml">
+    <Page Include="Views\AudioCaptureModeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

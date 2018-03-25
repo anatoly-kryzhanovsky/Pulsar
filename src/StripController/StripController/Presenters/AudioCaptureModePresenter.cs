@@ -18,26 +18,26 @@ using StripController.Views;
 
 namespace StripController.Presenters
 {
-    class CaptureModePresenter
+    class AudioCaptureModePresenter
     {
         private readonly IAudioCaptureModeView _view;
         private readonly IViewFactory _viewFactory;
-        private readonly ICaptureModeSettings _settings;
+        private readonly IAudioCaptureModeSettings _settings;
         private readonly TaskScheduler _uiScheduler;
         
-        private readonly ICaptureMode _mode;
+        private readonly IAudioCaptureMode _mode;
         private IEnumerable<GradientPointPe> _gradient;
 
-        public CaptureModePresenter(
+        public AudioCaptureModePresenter(
             IAudioCaptureModeView view,
             IViewFactory viewFactory,
-            ICaptureModeSettings settings, 
+            IAudioCaptureModeSettings settings, 
             IStripper stripper)
         {
             _view = view;
             _viewFactory = viewFactory;
             _settings = settings;
-            _view.DisplayObject = new CaptureColorModePe
+            _view.DisplayObject = new AudioCaptureColorModePe
             {
                 Sensivity = 1,
                 Bitmap = new Bitmap(350, 350)
@@ -56,7 +56,7 @@ namespace StripController.Presenters
             _view.SaveStateRequested += ViewOnSaveStateRequested;
 
             _uiScheduler = TaskScheduler.FromCurrentSynchronizationContext();
-            _mode = new CaptureMode(stripper);
+            _mode = new AudioCaptureMode(stripper);
             _mode.SpectrumUpdated += ModeOnSpectrumUpdated;
         }
 

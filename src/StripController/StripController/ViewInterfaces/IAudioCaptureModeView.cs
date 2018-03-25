@@ -10,7 +10,7 @@ namespace StripController.ViewInterfaces
 
     public interface IAudioCaptureModeView : IView
     {
-        CaptureColorModePe DisplayObject { get; set; }
+        AudioCaptureColorModePe DisplayObject { get; set; }
         
         event SensivityChangedDelegate SensivityChanged;
         event CaptureStatusChangedDelegate CaptureStatusChanged;
@@ -21,7 +21,5 @@ namespace StripController.ViewInterfaces
 
         void UpdateVisual();
         void SetGradient(GradientPointPe[] gradient);
-    }
-
-  
+    }  
 }

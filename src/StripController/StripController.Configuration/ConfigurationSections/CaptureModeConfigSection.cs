@@ -6,7 +6,7 @@ using StripController.Configuration.Models;
 
 namespace StripController.Configuration.ConfigurationSections
 {
-    public class CaptureModeConfigSection : ConfigurationSection, ICaptureModeSettings
+    public class CaptureModeConfigSection : ConfigurationSection, IAudioCaptureModeSettings
     {
         [ConfigurationProperty(nameof(Sensivity), IsRequired = true)]
         public double Sensivity

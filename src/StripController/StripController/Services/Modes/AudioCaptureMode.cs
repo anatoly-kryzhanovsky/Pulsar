@@ -13,7 +13,7 @@ using StripController.Services.Modes.Spectrum;
 
 namespace StripController.Services.Modes
 {
-    class CaptureMode : ICaptureMode
+    class AudioCaptureMode : IAudioCaptureMode
     {
         private WasapiCapture _soundIn;
         private IWaveSource _source;
@@ -28,7 +28,7 @@ namespace StripController.Services.Modes
 
         public IStripper Stripper { get; }
 
-        public CaptureMode(IStripper stripper)
+        public AudioCaptureMode(IStripper stripper)
         {
             Stripper = stripper;
             Initialize();

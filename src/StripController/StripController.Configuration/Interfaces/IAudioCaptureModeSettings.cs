@@ -3,7 +3,7 @@ using StripController.Configuration.Models;
 
 namespace StripController.Configuration.Interfaces
 {
-    public interface ICaptureModeSettings: IConfigSection
+    public interface IAudioCaptureModeSettings: IConfigSection
     {
         double Sensivity { get; set; }
 

@@ -2,7 +2,7 @@
 
 namespace StripController.PresentationEntities
 {
-    public class CaptureColorModePe : PresentationEntity
+    public class AudioCaptureColorModePe : PresentationEntity
     {
         private double _sensivity;
         private bool _isEnabled;
