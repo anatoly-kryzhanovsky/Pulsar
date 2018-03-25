@@ -20,7 +20,7 @@ namespace StripController.Services.ModuleConfig
                 .ToMethod(context => context.Kernel.Get<Settings>().StripperSettings)
                 .InSingletonScope();
 
-            Bind<ICaptureModeSettings>()
+            Bind<IAudioCaptureModeSettings>()
                 .ToMethod(context => context.Kernel.Get<Settings>().CaptrureModeSettings)
                 .InSingletonScope();
 

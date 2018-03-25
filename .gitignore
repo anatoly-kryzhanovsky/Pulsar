@@ -13,3 +13,5 @@ src/StripController/StripController/Resources/Thumbs.db
 src/StripController/stripper/Debug/
 src/StripController/stripper/Release/
 src/StripController/stripper/__vm/
+src/StripController/.vs/
+src/StripController/stripper/~AutoRecover.stripper.vcxproj

@@ -6,10 +6,11 @@ namespace StripController.Services
     {
         IProgramModeView CreateProgramModeView();
         ICustomColorModeView CreateCustomCoroModeView();
-        ICaptureModeView CreateCaptureColorModeView();
+        IVideoCaptureModeView CreateVideoCaptureColorModeView();
+        IAudioCaptureModeView CreateCaptureColorModeView();
         IMainWindow CreateMainWindow();
 
         IOpenFileDialog CreateOpenFileDialog();
-        ISaveFileDialog CreateSaveFileDialog();
+        ISaveFileDialog CreateSaveFileDialog();        
     }
 }

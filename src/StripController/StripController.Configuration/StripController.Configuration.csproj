@@ -50,7 +50,7 @@
     <Compile Include="ConfigurationSections\ProgramConfigElement.cs" />
     <Compile Include="ConfigurationSections\ProgramModeConfigurationSection.cs" />
     <Compile Include="ConfigurationSections\StripperConfigSection.cs" />
-    <Compile Include="Interfaces\ICaptureModeSettings.cs" />
+    <Compile Include="Interfaces\IAudioCaptureModeSettings.cs" />
     <Compile Include="Interfaces\IConfigSection.cs" />
     <Compile Include="Interfaces\ICustomColorModeSettings.cs" />
     <Compile Include="Interfaces\IProgramModeSettings.cs" />

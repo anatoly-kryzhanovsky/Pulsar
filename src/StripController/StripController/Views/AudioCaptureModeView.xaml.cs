@@ -8,11 +8,11 @@ using StripController.ViewInterfaces;
 
 namespace StripController.Views
 {
-    public partial class CaptureModeView : ICaptureModeView
+    public partial class AudioCaptureModeView : IAudioCaptureModeView
     {
-        public CaptureColorModePe DisplayObject
+        public AudioCaptureColorModePe DisplayObject
         {
-            get { return (CaptureColorModePe)DataContext; }
+            get { return (AudioCaptureColorModePe)DataContext; }
             set { DataContext = value; }
         }
 
@@ -28,7 +28,7 @@ namespace StripController.Views
         public event EventHandler SaveGradientRequested;
         public event EventHandler LoadGradientRequested;
 
-        public CaptureModeView()
+        public AudioCaptureModeView()
         {
             InitializeComponent();
         }

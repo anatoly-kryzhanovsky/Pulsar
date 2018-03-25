@@ -5,7 +5,7 @@ namespace StripController.Services.Modes
 {
     public delegate void SpectrumUpdatedEventHandler(object sender, SpectrumUpdatedEventArgs args);
 
-    public interface ICaptureMode : IMode
+    public interface IAudioCaptureMode : IMode
     {
         event SpectrumUpdatedEventHandler SpectrumUpdated;
         

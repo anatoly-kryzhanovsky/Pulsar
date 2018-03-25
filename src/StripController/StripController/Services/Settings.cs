@@ -18,7 +18,7 @@ namespace StripController.Services
         private readonly System.Configuration.Configuration _config;
 
         public IStripperSettings StripperSettings => _stripperConfig;
-        public ICaptureModeSettings CaptrureModeSettings => _captureModeConfig;
+        public IAudioCaptureModeSettings CaptrureModeSettings => _captureModeConfig;
         public ICustomColorModeSettings CustomColorModeSettings => _customColorModeConfig;
         public IProgramModeSettings ProgramModeSettings => _programModeConfig;
 
